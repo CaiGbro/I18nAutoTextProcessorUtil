@@ -1,4 +1,4 @@
-# I18nAutoTextProcessorUtil: Java 项目自动国际化工具
+# I18nAutoTextProcessorUtil: I18n Java 项目自动国际化工具
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
