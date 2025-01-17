@@ -41,6 +41,7 @@ import java.util.regex.Pattern;
  *
  * 作者：
  * CaiGbro
+ * 如果你对该项目有任何疑问、建议或需要帮助，请通过 CaiGbro@163.com 联系我。
  */
 public class I18nAutoTextProcessorUtil {
 
