@@ -32,6 +32,10 @@
 4. **易于使用：** 只需要简单的几步配置，即可将工具类集成到项目中。
 5. **处理复杂场景：** 考虑了各种复杂的代码结构和场景，例如多层嵌套的对象、不同的返回类型等。
 
+## 用法概览
+1.先后运行`process_controllers.py` 和`processing_hardcoded_words.py` 脚本，用生成的`messages_zh_CN.properties`文件生成 `messages_en_US.properties`文件，将这两个文件放在 `src/main/resources/messages` 目录下
+2.启动项目，此时如果前端请求头中携带Accept-Language值是zh-CN时就会返回中文内容，携带en-US就会返回英文内容。
+3.对于前端产生的数据或者数据库里的数据都会在返回给前端时被记录到`提取数据库词句.txt`文件中，定时从这个文件中提取与原资源文件不同的内容，补充原资源文件即可。
 ## 解决方案
 
 `I18nAutoTextProcessorUtil` 通过以下创新的方式解决了上述问题：
@@ -257,11 +261,6 @@
     if (someCondition) {
         throw new RuntimeException(I18nAutoTextProcessorUtil.getMessage("操作失败请重试.message"));
     }
-    ```
-    同时，在 `messages_zh_CN.properties` 文件中添加：
-    ```properties
-    操作失败请重试.message=操作失败，请重试！
-    ```
 
 ## 配套脚本
 
