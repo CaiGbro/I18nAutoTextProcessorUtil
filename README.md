@@ -36,6 +36,11 @@
 1. 先后运行`process_controllers.py` 和`processing_hardcoded_words.py` 脚本，用生成的`messages_zh_CN.properties`文件生成 `messages_en_US.properties`文件，将这两个文件放在 `src/main/resources/messages` 目录下。
 2. 启动项目，此时如果前端请求头中携带Accept-Language值是zh-CN时就会返回中文内容，携带en-US就会返回英文内容。
 3. 对于前端产生的数据或者数据库里的数据都会在返回给前端时被记录到`提取数据库词句.txt`文件中，定期运行`find_new_content.py`从这个文件中提取与原资源文件不同的内容，整理补充到原资源文件即可。
+
+## Why python
+为什么不将这两个python根据集成到I18nAutoTextProcessorUtil里：
+一开始就是准备这么干的，但后来发现，在使用AI模型编写这些代码的时候，用 java 语言总是写不对，甚至一些简单的错误反复踏步不能解决,更有甚者即让它们使用正确的python转换为java代码居然也出现些简单的错误反复踏步不能解决的问题，或许python在数据处理上具有先天大优势吧，所以我没有将这两个方法集成到这个工具类里了
+
 ## 解决方案
 
 `I18nAutoTextProcessorUtil` 通过以下创新的方式解决了上述问题：
