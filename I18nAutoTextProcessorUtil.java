@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -41,7 +42,6 @@ import java.util.regex.Pattern;
  *
  * 作者：
  * CaiGbro
- * 如果你对该项目有任何疑问、建议或需要帮助，请通过 CaiGbro@163.com 联系我。
  */
 public class I18nAutoTextProcessorUtil {
 
@@ -113,6 +113,7 @@ public class I18nAutoTextProcessorUtil {
     public static String getMessage(String key) {
         try {
             Locale locale = LocaleContextHolder.getLocale();
+//            System.out.println(locale.toString());
             ResourceBundle bundle = ResourceBundle.getBundle("messages.messages", locale);
             // 对 key 进行处理，去除空格和特殊字符
             if (key.endsWith(".message")) {
@@ -292,7 +293,7 @@ public class I18nAutoTextProcessorUtil {
 
         File outputFile = new File(OUTPUT_FILE);
         if (outputFile.exists()) {
-            lines = Files.readAllLines(Paths.get(OUTPUT_FILE));
+            lines = Files.readAllLines(Paths.get(OUTPUT_FILE), StandardCharsets.UTF_8);
         }
 
         Map<String, String> existingEntries = new HashMap<>();
@@ -304,7 +305,8 @@ public class I18nAutoTextProcessorUtil {
         }
 
         if (!existingEntries.containsKey(key) || !existingEntries.get(key).equals(originalValue)) {
-            FileWriter writer = new FileWriter(OUTPUT_FILE, true);
+            // 使用 OutputStreamWriter 指定 UTF-8 编码
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(outputFile, true), StandardCharsets.UTF_8);
             writer.write(key + "=" + originalValue + System.lineSeparator());
             writer.close();
         }
